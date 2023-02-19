@@ -9,6 +9,10 @@ class Product extends Model
 {
     use HasFactory;
     Public function category(){
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(category::class,'cid');
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class,'user_products');
     }
 }

@@ -2,32 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class CategoryController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        
-        $data = Category::all();
-        return $data;
-
-        // $data = Category::with('products')->get();
-        // return $data;
-        
+        //
     }
-
-    public function prod(){
-        $data = Category::with('products')->get();
-        return $data;
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -40,23 +27,17 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
-
-        return ["message" => "Category Created"];
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): Response
     {
-        
-        $data = Category::find($id);
-        return $data;
+        //
     }
 
     /**

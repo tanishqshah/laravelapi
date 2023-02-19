@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RevController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\userProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +30,38 @@ Route::middleware('auth:sanctum')->get("/users/something", [UserController::clas
 
 
 
+// admin 
+Route::post('/admin/register', [AdminController::class, 'store']);
+Route::post('/admin/login', [AdminController::class, 'login']);
 
 
-
-
-Route::post('/users', [UserController::class, 'store']);
+// user 
+Route::resource('/users',UserController::class);
 Route::post('/users/login', [UserController::class, 'login']);
 
+
+// cart 
+Route::get('/cart/{id}', [UserProductController::class, 'userProducts']);
+Route::delete('/cart/{id}', [UserProductController::class, 'destroy']);
+Route::post('/cart/add', [userProductController::class, 'store']);
+Route::put("/cart/update/{id}",[userProductController::class,'update']);
+Route::delete("/removefromcart/{userid}/{productid}",[UserProductController::class,'removeFromCart']);
+
+
+// category 
 Route::resource('/categories', CategoryController::class);
+Route::get('/category/products',[CategoryController::class, 'prod']);
+
+
+// userreview 
+Route::post('/user/review', [RevController::class, 'store']);
+Route::get('/user/review', [RevController::class, 'index']);
+
+
+
+
+
+
+// product 
 Route::resource('/products', ProductController::class);
+Route::get('/productswithcart/{id}',[ProductController::class, 'allProducts']);
