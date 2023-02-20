@@ -37,6 +37,7 @@ Route::post('/admin/login', [AdminController::class, 'login']);
 
 // user 
 Route::resource('/users',UserController::class);
+// Route::post('/users/register', [UserController::class, 'store']);
 Route::post('/users/login', [UserController::class, 'login']);
 
 
